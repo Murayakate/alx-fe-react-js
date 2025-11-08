@@ -1,4 +1,5 @@
 import ProfilePage from './components/ProfilePage';
+import UserProfile from './components/UserProfile';
 import { UserContext } from './components/UserContext.js';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     // and putting userData inside it for other components to use
     <UserContext.Provider value={userData}>
       <ProfilePage />
+      <UserProfile />
     </UserContext.Provider>
   );
 }
