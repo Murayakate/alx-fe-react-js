@@ -9,7 +9,10 @@ function Navbar() {
   const navStyle = {
     backgroundColor: '#333',
     padding: '15px',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    display: 'flex', // Makes the nav items display in a row
+    justifyContent: 'center', // Centers the nav items horizontally
+    alignItems: 'center' // Centers the nav items vertically
   };
 
   // Style for our navigation links
