@@ -19,6 +19,7 @@ const [description,setDescription]=useState('');
 
     return (
       <form onSubmit={handleSubmit}>
+        <h2>Add a New Recipe</h2>
         <input
           type="text"
           value={title}
@@ -33,4 +34,4 @@ const [description,setDescription]=useState('');
         <button type="submit">Add Recipe</button>
       </form>
     );
-  };
+};
