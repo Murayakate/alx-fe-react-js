@@ -82,5 +82,71 @@ export const useRecipeStore = create((set, get) => ({
       recipe.title.toLowerCase().includes(lowerSearchTerm) ||
       recipe.description.toLowerCase().includes(lowerSearchTerm)
     );
-  }
+  },
+
+  // ========== FAVORITES AND RECOMMENDATIONS ==========
+
+  // favorites: This array stores the IDs of recipes that users have marked as favorites
+  // Example: [1234, 5678, 9012] means those 3 recipes are favorites
+  favorites: [],
+
+  // recommendations: This array stores recipes that are recommended to the user
+  // Based on their favorite recipes
+  recommendations: [],
+
+  // addFavorite: This function adds a recipe ID to the favorites array
+  // It's called when a user clicks the "favorite" button on a recipe
+  addFavorite: (recipeId) => set(state => {
+    // Only add if not already in favorites
+    if (!state.favorites.includes(recipeId)) {
+      return { 
+        favorites: [...state.favorites, recipeId],
+        // Update recommendations when favorites change
+        recommendations: state.generateRecommendationsHelper(
+          [...state.favorites, recipeId],
+          state.recipes
+        )
+      };
+    }
+    return state;
+  }),
+
+  // removeFavorite: This function removes a recipe ID from the favorites array
+  // It's called when a user clicks to unfavorite a recipe
+  removeFavorite: (recipeId) => set(state => ({
+    favorites: state.favorites.filter(id => id !== recipeId),
+    // Update recommendations when favorites change
+    recommendations: state.generateRecommendationsHelper(
+      state.favorites.filter(id => id !== recipeId),
+      state.recipes
+    )
+  })),
+
+  // isFavorite: This helper function checks if a recipe is in the favorites
+  // Returns true if the recipe ID is in the favorites array, false otherwise
+  isFavorite: (recipeId) => {
+    return get().favorites.includes(recipeId);
+  },
+
+  // generateRecommendationsHelper: This function creates personalized recommendations
+  // It looks at the user's favorite recipes and suggests similar ones
+  // Think of it like: "If you liked Pizza, you might also like Pasta!"
+  generateRecommendationsHelper: (favorites, recipes) => {
+    // If no favorites, return random recipes as recommendations
+    if (favorites.length === 0) {
+      return recipes.slice(0, 3);
+    }
+
+    // Get recipes that are NOT in favorites
+    const notFavorited = recipes.filter(recipe => !favorites.includes(recipe.id));
+
+    // If there are not favorited recipes, return up to 3 of them
+    // These are good recommendations since the user hasn't seen them
+    return notFavorited.slice(0, 3);
+  },
+
+  // generateRecommendations: This function manually triggers recommendation generation
+  generateRecommendations: () => set(state => ({
+    recommendations: state.generateRecommendationsHelper(state.favorites, state.recipes)
+  }))
 }));

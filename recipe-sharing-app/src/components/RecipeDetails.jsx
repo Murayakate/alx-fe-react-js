@@ -6,6 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useRecipeStore } from './recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
+import FavoriteButton from './FavoriteButton';
 
 // Think of this like opening a book to read one specific story in detail
 const RecipeDetails = () => {
@@ -104,13 +105,14 @@ const RecipeDetails = () => {
         </div>
       </div>
 
-      {/* Show the edit form and delete button */}
+      {/* Show the favorite, edit form and delete button */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
         gap: '20px',
         marginBottom: '20px'
       }}>
+        <FavoriteButton recipeId={recipe.id} />
         <DeleteRecipeButton recipeId={recipe.id} />
       </div>
 
