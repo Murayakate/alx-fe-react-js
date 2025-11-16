@@ -4,7 +4,7 @@
 // It displays filtered recipes based on the search term
 
 import { useRecipeStore } from './recipeStore';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const RecipeList = () => {
   // Get FILTERED recipes from our store (not all recipes!)
@@ -13,9 +13,6 @@ const RecipeList = () => {
   
   // Also get the search term to show how many results we found
   const searchTerm = useRecipeStore(state => state.searchTerm);
-  
-  // useNavigate lets us go to the recipe details page when clicking a recipe
-  const navigate = useNavigate();
 
   return (
     <div style={{
@@ -105,8 +102,8 @@ const RecipeList = () => {
             </p>
 
             {/* View Details Button */}
-            <button
-              onClick={() => navigate(`/recipe/${recipe.id}`)}
+            <Link
+              to={`/recipe/${recipe.id}`}
               style={{
                 padding: '10px 15px',
                 backgroundColor: '#667eea',
@@ -117,7 +114,10 @@ const RecipeList = () => {
                 fontSize: '1em',
                 fontWeight: 'bold',
                 transition: 'all 0.3s ease',
-                width: '100%'
+                width: '100%',
+                textDecoration: 'none',
+                display: 'block',
+                textAlign: 'center'
               }}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = '#764ba2';
@@ -129,7 +129,7 @@ const RecipeList = () => {
               }}
             >
               👁️ View & Edit
-            </button>
+            </Link>
           </div>
         ))
       )}
