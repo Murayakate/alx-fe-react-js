@@ -5,6 +5,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
+import SearchBar from "./components/SearchBar";
 import RecipeDetails from "./components/RecipeDetails";
 import "./App.css";
 
@@ -14,10 +15,11 @@ function App() {
     <BrowserRouter>
       {/* Routes manages different pages based on the URL */}
       <Routes>
-        {/* Home page - shows the form and list of recipes */}
+        {/* Home page - shows the form, search bar, and list of recipes */}
         <Route path="/" element={
           <div>
             <AddRecipeForm />
+            <SearchBar />
             <RecipeList />
           </div>
         } />

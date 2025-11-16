@@ -2,7 +2,7 @@
 // This is a button that deletes a recipe when clicked
 // It asks for confirmation first so we don't accidentally delete recipes
 
-import { useRecipeStore } from '../stores/userecipe';
+import { useRecipeStore } from './recipeStore';
 import { useNavigate } from 'react-router-dom';
 
 // This component takes recipeId as a prop (the ID of the recipe to delete)

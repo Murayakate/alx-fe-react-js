@@ -3,7 +3,7 @@
 // It's like a form that's already filled with the recipe's current information
 
 import { useState } from 'react';
-import { useRecipeStore } from '../stores/userecipe';
+import { useRecipeStore } from './recipeStore';
 import { useNavigate } from 'react-router-dom';
 
 // This component takes a recipe object as a prop (the recipe we want to edit)

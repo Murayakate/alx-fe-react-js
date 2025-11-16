@@ -3,7 +3,7 @@
 // It gets the recipe ID from the URL and finds that recipe in our store
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { useRecipeStore } from '../stores/userecipe';
+import { useRecipeStore } from './recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
 

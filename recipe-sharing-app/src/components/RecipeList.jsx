@@ -1,13 +1,18 @@
 // RecipeList.jsx
 // This component shows all recipes in a nice list/grid format
 // Each recipe has a button to view more details
+// It displays filtered recipes based on the search term
 
-import { useRecipeStore } from '../stores/userecipe';
+import { useRecipeStore } from './recipeStore';
 import { useNavigate } from 'react-router-dom';
 
 const RecipeList = () => {
-  // Get all recipes from our store
-  const recipes = useRecipeStore(state => state.recipes);
+  // Get FILTERED recipes from our store (not all recipes!)
+  // The filteredRecipes array only contains recipes that match the search term
+  const recipes = useRecipeStore(state => state.filteredRecipes);
+  
+  // Also get the search term to show how many results we found
+  const searchTerm = useRecipeStore(state => state.searchTerm);
   
   // useNavigate lets us go to the recipe details page when clicking a recipe
   const navigate = useNavigate();
@@ -30,7 +35,18 @@ const RecipeList = () => {
           fontSize: '1.2em',
           color: '#999'
         }}>
-          📝 No recipes yet! Add your first recipe to get started.
+          {searchTerm ? (
+            <>
+              � No recipes found matching "{searchTerm}"
+              <p style={{ fontSize: '0.9em', marginTop: '10px' }}>
+                Try searching with different keywords!
+              </p>
+            </>
+          ) : (
+            <>
+              �📝 No recipes yet! Add your first recipe to get started.
+            </>
+          )}
         </div>
       ) : (
         // Map through all recipes and display each one
