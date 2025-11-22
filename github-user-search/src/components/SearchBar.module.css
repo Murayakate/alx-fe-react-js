@@ -1,42 +1,28 @@
-
-/* The container for the whole search bar */
+/* --- SEARCH BAR STYLES --- */
 .wrapper {
   background: white;
   width: 100%;
-  max-width: 500px; /* Stops it from getting too wide */
-  margin: 0 auto 40px; /* Centers it and adds space below */
-  padding: 10px;
-  border-radius: 50px; /* Makes it fully rounded (Pill shape) */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Soft shadow */
-  display: flex; /* Puts input and button in a row */
+  max-width: 500px;
+  margin: 0 auto 40px;
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
   align-items: center;
-  transition: box-shadow 0.3s;
+  border: 1px solid #e2e8f0;
 }
 
-/* Glow effect when you click inside */
-.wrapper:focus-within {
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); /* Purple glow */
-}
-
-/* The text input field */
 .input {
-  flex-grow: 1; /* Takes up all available space */
+  flex-grow: 1;
   border: none;
-  outline: none; /* Removes the default ugly blue border */
-  font-size: 1rem;
+  outline: none;
   padding: 10px 20px;
-  border-radius: 30px;
+  font-size: 1rem;
   color: #4a5568;
-  font-family: 'Inter', sans-serif;
+  background: transparent;
 }
 
-.input::placeholder {
-  color: #a0aec0;
-}
-
-/* The Search Button */
-
-.designBtn {
+.searchBtn {
   background-color: #4f46e5;
   color: white;
   border: none;
@@ -47,6 +33,82 @@
   transition: background-color 0.2s;
 }
 
-.designBtn:hover {
+.searchBtn:hover {
   background-color: #4338ca;
+}
+
+/* --- USER CARD STYLES (Restored!) --- */
+.card {
+  background: white;
+  width: 320px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  margin: 40px auto;
+  text-align: center; /* Keeps content centered */
+}
+
+.banner {
+  height: 100px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin-top: -50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  object-fit: cover;
+}
+
+.content {
+  padding: 15px 20px;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #2d3748;
+}
+
+.username {
+  display: block;
+  margin: 5px 0 15px;
+  color: #718096;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 20px;
+  background-color: #f7fafc;
+  border-top: 1px solid #edf2f7;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statValue {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #2d3748;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #718096;
+  text-transform: uppercase;
+  margin-top: 4px;
 }

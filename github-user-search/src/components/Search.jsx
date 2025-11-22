@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import fetchUserData  from '../services/githubService';
+import fetchUserData from '../services/githubService'; // Make sure this matches your export type
 import styles from './SearchBar.module.css';
 
 function Search() {
-  // 1. State Variables
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // 2. Handle Search Logic
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Stops page refresh
+    e.preventDefault();
     setLoading(true);
     setError(null);
     setUserData(null);
@@ -29,7 +27,7 @@ function Search() {
   return (
     <div className="search-container">
         
-        {/* --- FORM SECTION --- */}
+        {/* FORM */}
         <form onSubmit={handleSubmit} className={styles.wrapper}>
             <input 
                 type="text" 
@@ -41,26 +39,42 @@ function Search() {
             <button type="submit" className={styles.searchBtn}>Search</button>
         </form>
 
-        {/* --- RESULTS SECTION --- */}
+        {/* RESULTS */}
         {loading && <p>Loading...</p>}
-
         {error && <p>Looks like we cant find the user</p>}
 
         {userData && (
-            <div className="user-card" style={{ marginTop: '20px', textAlign: 'center' }}>
+            // Restoring the styles here:
+            <div className={styles.card}>
+                <div className={styles.banner}></div>
+                
                 <img 
                   src={userData.avatar_url} 
                   alt="avatar" 
-                  style={{ width: '100px', borderRadius: '50%' }} 
+                  className={styles.avatar} 
                 />
-                <h2>{userData.name || userData.login}</h2>
                 
-                <a href={userData.html_url} target="_blank" rel="noreferrer">
-                    {userData.login}
-                </a>
+                <div className={styles.content}>
+                    <h2 className={styles.name}>{userData.name || userData.login}</h2>
+                    <a href={userData.html_url} target="_blank" rel="noreferrer" className={styles.username}>
+                        {userData.login}
+                    </a>
+                </div>
                 
-                <p>Repos: {userData.public_repos}</p>
-                <p>Followers: {userData.followers}</p>
+                <div className={styles.stats}>
+                    <div className={styles.statItem}>
+                        <span className={styles.statValue}>{userData.public_repos}</span>
+                        <span className={styles.statLabel}>Repos</span>
+                    </div>
+                    <div className={styles.statItem}>
+                        <span className={styles.statValue}>{userData.followers}</span>
+                        <span className={styles.statLabel}>Followers</span>
+                    </div>
+                    <div className={styles.statItem}>
+                        <span className={styles.statValue}>{userData.following}</span>
+                        <span className={styles.statLabel}>Following</span>
+                    </div>
+                </div>
             </div>
         )}
     </div>
